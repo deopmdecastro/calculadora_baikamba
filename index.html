@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Taxas BAI</title>
+    <link rel="stylesheet" href="styles.css">
+   
+</head>
+
+<body>
+
+    <main>
+        <div class="container">
+            <h1>Calculadora de Taxas <br> BAI KAMBA</h1>
+            <form id="taxCalculator">
+                <label for="dolar">Insira o valor em dólar ($):</label>
+                <input type="number" id="dolar" step="0.01" required><br>
+
+                <label for="cambio">Insira o câmbio actual (KZ):</label>
+                <input type="number" id="cambio" step="0.01" required><br>
+
+                <label for="taxaCompra">Insira a taxa de compra (%):</label>
+                <input type="number" id="taxaCompra" step="0.01" required><br>
+
+                <label for="taxaCarregamento">Insira a taxa de carregamento (%):</label>
+                <input type="number" id="taxaCarregamento" step="0.01" required><br>
+
+                <label for="iva">Insira o IVA (%):</label>
+                <input type="number" id="iva" step="0.01" required><br>
+
+                <input type="submit" value="Calcular">
+            </form>
+
+            <h2>Resultados:</h2>
+            <p>Total em Kwanza sem as taxas é: <span id="resultadoTST"></span> KZ</p>
+            <p>Taxa de compra total é: <span id="resultadoTCC"></span> KZ</p>
+            <p>Taxa de carregamento total é: <span id="resultadoTCCS"></span> KZ</p>
+            <p>O valor total a carregar é: <span id="resultadoTCTC"></span> KZ</p>
+            <p>O valor total a gastar é: <span id="resultadoTCCTC"></span> KZ</p>
+        </div>
+
+        </div>
+
+    </main>
+
+    <footer>
+        &copy; 2023 <a href="https://www.instagram.com/mw.d3o/">manueldesigner</a> 
+    </footer>
+
+    <script>
+        document.getElementById('taxCalculator').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var D = parseFloat(document.getElementById('dolar').value);
+            var C = parseFloat(document.getElementById('cambio').value);
+            var T1 = parseFloat(document.getElementById('taxaCompra').value);
+            var T2 = parseFloat(document.getElementById('taxaCarregamento').value);
+            var I = parseFloat(document.getElementById('iva').value);
+
+            var TST = D * C;
+            var TC = (TST * (T1 / 100)).toFixed(2);
+            var ITC = (TC * (I / 100)).toFixed(2);
+            var TCC = (parseFloat(TC) + parseFloat(ITC)).toFixed(2);
+            var TCTC = (parseFloat(TST) + parseFloat(TCC)).toFixed(2);
+            var TCS = (TCTC * (T2 / 100)).toFixed(2);
+            var ITCS = (TCS * (I / 100)).toFixed(2);
+            var TCCS = (parseFloat(TCS) + parseFloat(ITCS)).toFixed(2);
+            var TCCTC = (parseFloat(TCTC) + parseFloat(TCCS)).toFixed(2);
+
+            document.getElementById('resultadoTST').textContent = TST;
+            document.getElementById('resultadoTCC').textContent = TCC;
+            document.getElementById('resultadoTCCS').textContent = TCCS;
+            document.getElementById('resultadoTCTC').textContent = TCTC;
+            document.getElementById('resultadoTCCTC').textContent = TCCTC;
+        });
+    </script>
+</body>
+
+</html>
